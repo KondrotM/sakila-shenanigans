@@ -27,8 +27,8 @@ public class SakilaAppApplication {
 	@Autowired
 	private FilmRepository filmRepository;
 
-	@Autowired
-	private EntityManager entityManager;
+//	@Autowired
+//	private EntityManager entityManager;
 
 	public SakilaAppApplication(ActorRepository actorRepository){
 		this.actorRepository = actorRepository;
@@ -47,7 +47,17 @@ public class SakilaAppApplication {
 
 	@GetMapping("/categories/{id}")
 	public Object getFilmCategory(@PathVariable("id") int id) {
-		return filmRepository.getCategory(id);
+		return this.filmRepository.getCategory(id);
+	}
+
+	@GetMapping("/film")
+	public @ResponseBody Iterable<Film> getAllFilms() {
+		return filmRepository.findAll();
+	}
+
+	@GetMapping("/filmStats")
+	public @ResponseBody Iterable<Object> getFilmStats() {
+		return filmRepository.getFilmStats();
 	}
 
 
