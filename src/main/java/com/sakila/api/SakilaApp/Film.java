@@ -1,4 +1,4 @@
-package com.sakila.api.SakilaApp.scraper;
+package com.sakila.api.SakilaApp;
 
 import javax.persistence.*;
 
@@ -26,13 +26,17 @@ public class Film {
     @Column(name = "length")
     int length;
 
+    @Basic(optional = true)
+    @Column(name = "rental_rate", nullable = true)
+    double rental_rate;
+
     /**
      * number of times watched
      * total time watched
      * revenue
      */
 
-    public Film(int _id, String title, String description, int released, String rating, int length ) {
+    public Film(int _id, String title, String description, int released, String rating, int length) {
         this._id = _id;
         this.title = title;
         this.description = description;
@@ -89,5 +93,13 @@ public class Film {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public double getRental_rate() {
+        return rental_rate;
+    }
+
+    public void setRental_rate(double rental_rate) {
+        this.rental_rate = rental_rate;
     }
 }
