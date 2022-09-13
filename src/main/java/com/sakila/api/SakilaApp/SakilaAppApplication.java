@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -37,12 +39,15 @@ public class SakilaAppApplication {
 	@Autowired
 	private FilmRepository filmRepository;
 
+	@Autowired
+	private RatingRepository ratingRepository;
 //	@Autowired
 //	private EntityManager entityManager;
 
-	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository){
+	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository, RatingRepository ratingRepository){
 		this.actorRepository = actorRepository;
 		this.filmRepository = filmRepository;
+		this.ratingRepository = ratingRepository;
 	}
 
 	@GetMapping("/allActors")
@@ -69,13 +74,20 @@ public class SakilaAppApplication {
 	@GetMapping("/film/{id}")
 	public Optional<Film> getFilmById(@PathVariable("id") int id){
 		Optional<Film> f =  this.filmRepository.findById(id);
-
-//		Film fi = f.get();
-
-//		System.out.println(fi.getRental_rate());
-
 		return f;
+	}
 
+	@PostMapping("/addRating")
+	public String addRating(
+			@RequestBody Rating rating
+	) {
+		ratingRepository.save(rating);
+
+		JsonObject j = new JsonObject();
+
+		j.addProperty("message", "Rating added");
+
+		return j.toString();
 	}
 
 	@GetMapping("/filmStats/{id}")
@@ -107,15 +119,16 @@ public class SakilaAppApplication {
 			}
 		}
 
-
-
+		Optional<Object> r = this.ratingRepository.findFilmReactionsById(id);
+		Object[] ri = (Object[]) r.get();
+		String[] reactionOptions = new String[]{ "wow", "xd", "love", "scary"};
+		for (int i = 0; i < ((Object[]) r.get()).length; i++) {
+			j.addProperty(reactionOptions[i], ri[i].toString());
+		}
 
 //		Gson resp = new Gson();
 //		GsonBuilder b = resp.newBuilder();
 //		b.create();
-
-
-
 
 //		FilmSchema fs = new FilmSchema();
 //		fs.setId();

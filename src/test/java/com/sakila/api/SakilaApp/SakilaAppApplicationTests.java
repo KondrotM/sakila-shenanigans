@@ -24,12 +24,14 @@ class MockitoTests {
 	@Mock
 	private ActorRepository actorRepository;
 
+	@Mock
+	private RatingRepository ratingRepository;
 	@BeforeEach
 	void setup(){
 		filmRepository = mock(FilmRepository.class);
 		actorRepository = mock(ActorRepository.class);
-
-		sakilaAppApplication = new SakilaAppApplication(actorRepository, filmRepository);
+		ratingRepository = mock(RatingRepository.class);
+		sakilaAppApplication = new SakilaAppApplication(actorRepository, filmRepository, ratingRepository);
 	}
 
 	@Test
