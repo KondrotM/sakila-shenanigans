@@ -1,4 +1,4 @@
-package com.sakila.api.SakilaApp.scraper;
+package com.sakila.api.SakilaApp;
 
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 

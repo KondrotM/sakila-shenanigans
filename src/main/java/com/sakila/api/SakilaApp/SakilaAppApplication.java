@@ -24,15 +24,15 @@ public class SakilaAppApplication {
 		SpringApplication.run(SakilaAppApplication.class, args);
 	}
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/home/*").allowedOrigins("http://localhost:3000");
-			}
-		};
-	}
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurerAdapter() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/home/*").allowedOrigins("http://localhost:3000");
+//			}
+//		};
+//	}
 
 	@Autowired
 	private ActorRepository actorRepository;
@@ -42,8 +42,6 @@ public class SakilaAppApplication {
 
 	@Autowired
 	private RatingRepository ratingRepository;
-//	@Autowired
-//	private EntityManager entityManager;
 
 	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository, RatingRepository ratingRepository){
 		this.actorRepository = actorRepository;
@@ -51,6 +49,9 @@ public class SakilaAppApplication {
 		this.ratingRepository = ratingRepository;
 	}
 
+	/**
+	 * CRUD get mappings
+	 */
 	@GetMapping("/allActors")
 	public @ResponseBody
 	Iterable<Actor> getAllActors(){
@@ -74,37 +75,36 @@ public class SakilaAppApplication {
 
 	@GetMapping("/film/{id}")
 	public Optional<Film> getFilmById(@PathVariable("id") int id){
-		Optional<Film> f =  this.filmRepository.findById(id);
-		return f;
+		return this.filmRepository.findById(id);
 	}
 
-	@PostMapping("/addRating")
-	public String addRating(
-			@RequestBody Rating rating
-	) {
-		ratingRepository.save(rating);
-
-		JsonObject j = new JsonObject();
-
-		j.addProperty("message", "Rating added");
-
-		return j.toString();
-	}
-
+	/**
+	 * Custom get mapping to get consolidated film data.
+	 * Gets regular film data and rental data.
+	 * Sometimes there is no rental data, in which case it just fetches film data.
+	 * Finally, a count of film ratings is fetched.
+	 * @param id id of film to get
+	 * @return Json text which has been converted to a string
+	 */
 	@GetMapping("/filmStats/{id}")
 	public String getFilmStatsById(@PathVariable("id") int id) {
 
+		// Initialise object to return
 		JsonObject j = new JsonObject();
 
 		try {
 			Optional<Object> f = this.filmRepository.findFilmStatsById(id);
-			Object[] fi = (Object[]) f.get();
+			if (f.isPresent()) {
+				Object[] fi = (Object[]) f.get();
 
-			j.addProperty("rented", true);
+				j.addProperty("rented", true);
 
-			String[] options = new String[]{"id", "title", "description", "date", "length", "rating", "rentalRate", "genre", "timesRented", "timeWatched", "revenue"};
-			for (int i = 0; i < ((Object[]) f.get()).length; i++) {
-				j.addProperty(options[i], fi[i].toString());
+				String[] options = new String[]{"id", "title", "description", "date", "length", "rating", "rentalRate", "genre", "timesRented", "timeWatched", "revenue"};
+				for (int i = 0; i < ((Object[]) f.get()).length; i++) {
+					j.addProperty(options[i], fi[i].toString());
+				}
+			} else {
+				throw new NoSuchElementException();
 			}
 		} catch (NullPointerException | NoSuchElementException e) {
 			// Null pointer is thrown when there are no relations in the rentals select statement
@@ -113,31 +113,58 @@ public class SakilaAppApplication {
 			j.addProperty("rented", false);
 
 			Optional<Object> f = this.filmRepository.findFilmStatsUnrentedById(id);
-			// Nothing can be shown if this value is empty, error is thrown to front-end.
-			Object[] fi = (Object[]) f.get();
+			// Nothing can be shown if this value is empty, empty json is thrown to front-end.
+			if (f.isPresent()) {
+				Object[] fi = (Object[]) f.get();
 
-			String[] options = new String[]{"id", "title", "description", "date", "length", "rating", "rentalRate", "genre"};
-			for (int i = 0; i < ((Object[]) f.get()).length; i++) {
-				j.addProperty(options[i], fi[i].toString());
+				String[] options = new String[]{"id", "title", "description", "date", "length", "rating", "rentalRate", "genre"};
+				for (int i = 0; i < ((Object[]) f.get()).length; i++) {
+					j.addProperty(options[i], fi[i].toString());
+				}
 			}
 		}
 
 		Optional<Object> r = this.ratingRepository.findFilmReactionsById(id);
-		Object[] ri = (Object[]) r.get();
-		String[] reactionOptions = new String[]{ "wow", "xd", "love", "scary"};
-		for (int i = 0; i < ((Object[]) r.get()).length; i++) {
-			j.addProperty(reactionOptions[i], ri[i].toString());
+		if (r.isPresent()) {
+			Object[] ri = (Object[]) r.get();
+			String[] reactionOptions = new String[]{"wow", "xd", "love", "scary"};
+			for (int i = 0; i < ((Object[]) r.get()).length; i++) {
+				j.addProperty(reactionOptions[i], ri[i].toString());
+			}
 		}
 
-//		Gson resp = new Gson();
-//		GsonBuilder b = resp.newBuilder();
-//		b.create();
-
-//		FilmSchema fs = new FilmSchema();
-//		fs.setId();
 		return j.toString();
 	}
 
+	/**
+	 * Adds user emotion rating to the database.
+	 * @param rating Rating which contains filmId and ratingId
+	 * @return confirmation
+	 */
+	@PostMapping("/addRating")
+	public String addRating(
+			@RequestBody Rating rating
+	) {
+		// Re-mapping rating to avoid critical security issue exclaimed in SonarCloud
+		Rating persistentRating = new Rating();
+		persistentRating.setRating_id(rating.getRating_id());
+		persistentRating.setFilm_id(rating.getFilm_id());
+		persistentRating.setUser_id(rating.getUser_id());
+
+		ratingRepository.save(persistentRating);
+
+		JsonObject j = new JsonObject();
+
+		j.addProperty("message", "Rating added");
+
+		return j.toString();
+	}
+
+
+	/**
+	 * Gets an iterable custom mapping of films. Implementation unfinished.
+	 * @return List of lists of films
+	 */
 	@GetMapping("/filmStats")
 	public @ResponseBody Iterable<Object> getFilmStats() {
 		return filmRepository.getFilmStats();
