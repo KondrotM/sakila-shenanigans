@@ -1,4 +1,4 @@
-package com.sakila.api.SakilaApp;
+package com.sakila.api.app;
 
 import javax.persistence.*;
 

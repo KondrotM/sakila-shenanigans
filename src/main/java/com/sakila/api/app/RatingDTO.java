@@ -1,6 +1,4 @@
-package com.sakila.api.SakilaApp;
-
-import javax.persistence.Column;
+package com.sakila.api.app;
 
 public class RatingDTO {
     private int rating_id;

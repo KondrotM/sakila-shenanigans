@@ -1,6 +1,6 @@
-package com.sakila.api.SakilaApp.UnitTests;
+package com.sakila.api.app.UnitTests;
 
-import com.sakila.api.SakilaApp.Actor;
+import com.sakila.api.app.Actor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,10 +11,12 @@ public class ActorTest {
     @Test
     public void test_actor_initalise(){
         Actor a = new Actor();
+        Assertions.assertNotNull(a);
     }
     @Test
     public void test_actor_full_init(){
         Actor a = new Actor(1,"Nicki-James","Shepherd");
+        Assertions.assertNotNull(a);
     }
     @Test
     public void test_actor_get_id(){

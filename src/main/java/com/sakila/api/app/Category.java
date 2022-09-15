@@ -1,6 +1,4 @@
-package com.sakila.api.SakilaApp;
-
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+package com.sakila.api.app;
 
 import javax.persistence.*;
 

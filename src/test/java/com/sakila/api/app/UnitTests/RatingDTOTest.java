@@ -1,6 +1,6 @@
-package com.sakila.api.SakilaApp.UnitTests;
+package com.sakila.api.app.UnitTests;
 
-import com.sakila.api.SakilaApp.RatingDTO;
+import com.sakila.api.app.RatingDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

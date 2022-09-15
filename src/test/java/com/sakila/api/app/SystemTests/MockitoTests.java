@@ -1,7 +1,7 @@
-package com.sakila.api.SakilaApp.SystemTests;
+package com.sakila.api.app.SystemTests;
 
 import com.google.gson.JsonObject;
-import com.sakila.api.SakilaApp.*;
+import com.sakila.api.app.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.sakila.api.SakilaApp.BDD;
+package com.sakila.api.app.BDD;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

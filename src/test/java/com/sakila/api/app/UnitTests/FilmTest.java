@@ -1,7 +1,6 @@
-package com.sakila.api.SakilaApp.UnitTests;
+package com.sakila.api.app.UnitTests;
 
-import com.google.common.collect.Iterables;
-import com.sakila.api.SakilaApp.Film;
+import com.sakila.api.app.Film;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,16 +11,19 @@ public class FilmTest {
     @Test
     public void test_film_initialise() {
         Film f = new Film();
+        Assertions.assertNotNull(f);
     }
 
     @Test
     public void test_film_partial_initialise() {
         Film f = new Film(0, "African Egg");
+        Assertions.assertNotNull(f);
     }
 
     @Test
     public void test_film_full_initialise() {
         Film f = new Film(123, "Shrek License", "A tale of a teacher chasing a SQL Developer in a box", 2006, "PG", 50);
+        Assertions.assertNotNull(f);
     }
 
 
