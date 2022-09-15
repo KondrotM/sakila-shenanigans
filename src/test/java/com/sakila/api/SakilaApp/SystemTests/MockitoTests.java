@@ -1,22 +1,15 @@
-package com.sakila.api.SakilaApp;
+package com.sakila.api.SakilaApp.SystemTests;
 
 import com.google.gson.JsonObject;
-import org.bouncycastle.jcajce.provider.asymmetric.rsa.CipherSpi;
+import com.sakila.api.SakilaApp.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import org.mockito.Mock;
-
-import javax.naming.event.ObjectChangeListener;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -150,7 +143,6 @@ class MockitoTests {
 		expected = j.toString();
 		actual = sakilaAppApplication.getFilmStatsById(1001);
 		Assertions.assertEquals(expected, actual, "Mismatch");
-
 
 		/*
 		 * Branch 3
