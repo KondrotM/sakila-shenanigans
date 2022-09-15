@@ -55,3 +55,4 @@ public class Rating {
         this.user_id = user_id;
     }
 }
+

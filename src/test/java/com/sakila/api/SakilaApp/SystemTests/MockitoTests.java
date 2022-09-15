@@ -158,7 +158,7 @@ class MockitoTests {
 
 	@Test
 	void testAddRating() {
-		Rating r = new Rating();
+		RatingDTO r = new RatingDTO();
 		r.setUser_id(1);
 		r.setRating_id(1);
 		r.setFilm_id(1);

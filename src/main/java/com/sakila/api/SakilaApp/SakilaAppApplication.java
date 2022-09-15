@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 @SpringBootApplication
 @RestController
 @RequestMapping("/home")
-@CrossOrigin
+@CrossOrigin("kondrot.net")
 public class SakilaAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SakilaAppApplication.class, args);
@@ -128,7 +128,7 @@ public class SakilaAppApplication {
 	 */
 	@PostMapping("/addRating")
 	public String addRating(
-			@RequestBody Rating rating
+			@RequestBody RatingDTO rating
 	) {
 		// Re-mapping rating to avoid critical security issue exclaimed in SonarCloud
 		Rating persistentRating = new Rating();

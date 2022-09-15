@@ -56,10 +56,6 @@ public class MainSelenium {
 
         for (String title : titles) {
 
-            System.out.println("----------------");
-            System.out.println(title);
-//            film poster from paradise sabrina
-
             driver.get("https://app.wombo.art");
             driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
             WebElement textBox = driver.findElement(By.tagName("input"));
@@ -67,23 +63,20 @@ public class MainSelenium {
             textBox.sendKeys(title);
             driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
 
-//            WebElement artStyle = driver.findElement(By.xpath("//img[@alt='Realistic']"));
             WebElement artStyle = driver.findElement(By.xpath("//img[@alt='Realistic']"));
             artStyle.click();
 
             WebElement submit = driver.findElement(By.xpath("//button[text()='Create']"));
             submit.click();
 
-            // Shoutouts to ma boy TOM
+            // ShoutOut to TOM
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1000));
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='ArtCard__CardImage-sc-67t09v-2 dOXnUm']")));
 
             driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
+
             WebElement imageElement = driver.findElement(By.xpath("//*[@class='ArtCard__CardImage-sc-67t09v-2 dOXnUm']"));
             String src = imageElement.getAttribute("src");
-            System.out.println("----------------------");
-            System.out.println(src);
-
 
             BufferedImage image = ImageIO.read(new URL(src));
             File outputFile = new File("cards/" + title + ".png");
