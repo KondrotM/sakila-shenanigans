@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -105,12 +106,14 @@ public class SakilaAppApplication {
 			for (int i = 0; i < ((Object[]) f.get()).length; i++) {
 				j.addProperty(options[i], fi[i].toString());
 			}
-		} catch (NullPointerException e) {
+		} catch (NullPointerException | NoSuchElementException e) {
 			// Null pointer is thrown when there are no relations in the rentals select statement
+			// NoSuchElement is thrown when f.get is empty.
 
 			j.addProperty("rented", false);
 
 			Optional<Object> f = this.filmRepository.findFilmStatsUnrentedById(id);
+			// Nothing can be shown if this value is empty, error is thrown to front-end.
 			Object[] fi = (Object[]) f.get();
 
 			String[] options = new String[]{"id", "title", "description", "date", "length", "rating", "rentalRate", "genre"};

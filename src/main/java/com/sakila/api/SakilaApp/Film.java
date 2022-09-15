@@ -45,6 +45,11 @@ public class Film {
         this.length = length;
     }
 
+    public Film(int _id, String title) {
+        this._id = _id;
+        this.title = title;
+    }
+
     public Film(){}
 
     public int get_id() {

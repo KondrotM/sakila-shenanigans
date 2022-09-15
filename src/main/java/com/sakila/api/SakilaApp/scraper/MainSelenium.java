@@ -1,11 +1,7 @@
 package com.sakila.api.SakilaApp.scraper;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,12 +11,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
-//import io.github.bonigarcia.wdm.*;
 
 public class MainSelenium {
 
@@ -51,16 +45,16 @@ public class MainSelenium {
                 "ZHIVAGO CORE",
                 "ZOOLANDER FICTION",
                 "ZORRO ARK"
-                ));
+        ));
 
 
-        System.setProperty("webdriver.gecko.driver","D:\\tsi\\Sakilla\\sakila-shenanigans\\geckodriver-v0.31.0-win64\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "D:\\tsi\\Sakilla\\sakila-shenanigans\\geckodriver-v0.31.0-win64\\geckodriver.exe");
         FirefoxOptions options = new FirefoxOptions();
         WebDriver driver;
 
         driver = new FirefoxDriver(options);
 
-        for (String title:titles) {
+        for (String title : titles) {
 
             System.out.println("----------------");
             System.out.println(title);
@@ -81,7 +75,7 @@ public class MainSelenium {
             submit.click();
 
             // Shoutouts to ma boy TOM
-            WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(1000));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1000));
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='ArtCard__CardImage-sc-67t09v-2 dOXnUm']")));
 
             driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
@@ -92,89 +86,10 @@ public class MainSelenium {
 
 
             BufferedImage image = ImageIO.read(new URL(src));
-            File outputFile = new File("cards/"+ title +".png");
+            File outputFile = new File("cards/" + title + ".png");
             ImageIO.write(image, "png", outputFile);
 
         }
 
-
-//        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
-//        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-//        String title = driver.getTitle();
-//        System.out.println("TITLE " + title);
-//        WebElement textBox = driver.findElement(By.name("my-text"));
-//        WebElement submitButton = driver.findElement(By.cssSelector("button"));
-//        textBox.sendKeys("Selenium");
-//        submitButton.click();
-//
-//        WebElement message = driver.findElement(By.id("message"));
-//        String value = message.getText();
-
-        /*
-        driver.get("https://app.wombo.art");
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        WebElement textBox = driver.findElement(By.tagName("input"));
-
-        textBox.sendKeys("African Egg");
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-
-        WebElement artStyle = driver.findElement(By.xpath("//img[@alt='Realistic']"));
-        artStyle.click();
-
-        WebElement submit = driver.findElement(By.xpath("//button[text()='Create']"));
-        submit.click();
-
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(1000));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='ArtCard__CardImage-sc-67t09v-2 dOXnUm']")));
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        WebElement imageElement = driver.findElement(By.xpath("//*[@class='ArtCard__CardImage-sc-67t09v-2 dOXnUm']"));
-        String src = imageElement.getAttribute("src");
-        System.out.println("----------------------");
-        System.out.println(src);
-
-        BufferedImage image = ImageIO.read(new URL(src));
-        File outputFile = new File("cards/"+ "africanEgg" +".png");
-        ImageIO.write(image, "png", outputFile);
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000000));
-        WebElement backButton = driver.findElement(By.xpath("//button[contains(@class,'BackButton')]"));
-        backButton.click();
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        textBox = driver.findElement(By.tagName("input"));
-        textBox.clear();
-        textBox.sendKeys("Elephant");
-
-//        driver.quit();
-
-         */
     }
-
-}
-class ChromeTest {
-
-    WebDriver driver;
-//
-//    @BeforeAll
-//    static void setupAll() {
-//        WebDriverManager.chromedriver().setup();
-//    }
-
-//    @BeforeEach
-    void setup() {
-        driver = new ChromeDriver();
-    }
-
-//    @AfterEach
-//    void teardown() {
-//        driver.quit();
-//    }
-//
-//    @Test
-//    void test() {
-//        // Your test logic here
-//    }
-
 }

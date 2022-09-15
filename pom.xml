@@ -1,112 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.sakila.api</groupId>
-	<artifactId>SakilaApp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>SakilaApp</name>
-	<description>Demo project for Spring Boot</description>
-	<properties>
-		<java.version>17</java.version>
-		<!--	SonarCloud credentials	-->
-		<sonar.organization>kondrotm</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-	</properties>
-	<dependencies>
-		<!--	Selenium -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>4.4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.bonigarcia</groupId>
-			<artifactId>webdrivermanager</artifactId>
-			<version>5.2.3</version>
-			<scope>compile</scope>
-		</dependency>
 
-		<!-- 	Unit testing with JUnit	-->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>5.9.0</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!--	SpringBoot dependencies	-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<!--	SQL Connection	-->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.25</version>
-		</dependency>
-
-		<!--	JSON Helper	-->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.9.0</version>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-			<!--	JaCoCo code coverage	-->
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.8</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<!-- attached to Maven test phase -->
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">  
+  <modelVersion>4.0.0</modelVersion>  
+  <parent> 
+    <groupId>org.springframework.boot</groupId>  
+    <artifactId>spring-boot-starter-parent</artifactId>  
+    <version>2.7.3</version>  
+    <relativePath/>  
+    <!-- lookup parent from repository --> 
+  </parent>  
+  <groupId>com.sakila.api</groupId>  
+  <artifactId>SakilaApp</artifactId>
+  <version>0.0.9-SNAPSHOT</version>
+  <name>SakilaIMDB</name>
+  <description>Demo project for Sakila movie database</description>
+  <properties> 
+    <java.version>17</java.version>  
+    <!--	SonarCloud credentials	-->  
+    <sonar.organization>kondrotm</sonar.organization>  
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url> 
+  </properties>  
+  <dependencies> 
+    <!--	Selenium -->  
+    <dependency> 
+      <groupId>org.seleniumhq.selenium</groupId>  
+      <artifactId>selenium-java</artifactId>  
+      <version>4.4.0</version> 
+    </dependency>  
+    <dependency> 
+      <groupId>io.github.bonigarcia</groupId>  
+      <artifactId>webdrivermanager</artifactId>  
+      <version>5.2.3</version>  
+      <scope>compile</scope> 
+    </dependency>  
+    <!-- 	Unit testing with JUnit	-->  
+    <dependency> 
+      <groupId>org.junit.jupiter</groupId>  
+      <artifactId>junit-jupiter</artifactId>  
+      <version>5.9.0</version>  
+      <scope>test</scope> 
+    </dependency>
+    <!-- BDD Testing with Cucumber	-->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>7.6.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-gherkin</artifactId>
+      <version>7.6.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>7.6.0</version>
+    </dependency>
+    <!--	SpringBoot dependencies	-->  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-data-jpa</artifactId> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-web</artifactId> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-devtools</artifactId>  
+      <scope>runtime</scope>  
+      <optional>true</optional> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-test</artifactId>  
+      <scope>test</scope> 
+    </dependency>  
+    <!--	SQL Connection	-->  
+    <dependency> 
+      <groupId>mysql</groupId>  
+      <artifactId>mysql-connector-java</artifactId>  
+      <version>8.0.25</version> 
+    </dependency>  
+    <!--	JSON Helper	-->  
+    <dependency> 
+      <groupId>com.google.code.gson</groupId>  
+      <artifactId>gson</artifactId>  
+      <version>2.9.0</version> 
+    </dependency> 
+  </dependencies>  
+  <build> 
+    <plugins> 
+      <plugin> 
+        <groupId>org.springframework.boot</groupId>  
+        <artifactId>spring-boot-maven-plugin</artifactId> 
+      </plugin>  
+      <!--	JaCoCo code coverage	-->  
+      <plugin> 
+        <groupId>org.jacoco</groupId>  
+        <artifactId>jacoco-maven-plugin</artifactId>  
+        <version>0.8.8</version>  
+        <executions> 
+          <execution> 
+            <goals> 
+              <goal>prepare-agent</goal> 
+            </goals> 
+          </execution>  
+          <!-- attached to Maven test phase -->  
+          <execution> 
+            <id>report</id>  
+            <phase>test</phase>  
+            <goals> 
+              <goal>report</goal> 
+            </goals> 
+          </execution> 
+        </executions> 
+      </plugin>  
+      <plugin>
+        <groupId>com.microsoft.azure</groupId>
+        <artifactId>azure-webapp-maven-plugin</artifactId>
+        <version>2.5.0</version>
+        <configuration>
+          <schemaVersion>v2</schemaVersion>
+          <subscriptionId>24fd2a91-b645-45bc-a01e-b0410da54ae8</subscriptionId>
+          <resourceGroup>SakilaApp-1663062696251-rg</resourceGroup>
+          <appName>SakilaApp-1663062696251</appName>
+          <pricingTier>P1v2</pricingTier>
+          <region>centralus</region>
+          <runtime>
+            <os>Linux</os>
+            <javaVersion>Java 17</javaVersion>
+            <webContainer>Java SE</webContainer>
+          </runtime>
+          <deployment>
+            <resources>
+              <resource>
+                <directory>${project.basedir}/target</directory>
+                <includes>
+                  <include>*.jar</include>
+                </includes>
+              </resource>
+            </resources>
+          </deployment>
+        </configuration>
+      </plugin>
+    </plugins> 
+  </build> 
 </project>
