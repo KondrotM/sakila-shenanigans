@@ -1,19 +1,14 @@
 package com.sakila.api.SakilaApp;
 
-import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.SpringApplication;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
+import com.google.gson.JsonObject;
 
 @SpringBootApplication
 @RestController
@@ -23,16 +18,6 @@ public class SakilaAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SakilaAppApplication.class, args);
 	}
-
-//	@Bean
-//	public WebMvcConfigurer corsConfigurer() {
-//		return new WebMvcConfigurerAdapter() {
-//			@Override
-//			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/home/*").allowedOrigins("http://localhost:3000");
-//			}
-//		};
-//	}
 
 	@Autowired
 	private ActorRepository actorRepository;
