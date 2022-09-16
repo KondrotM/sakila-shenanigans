@@ -132,9 +132,9 @@ public class SakilaAppApplication {
 	) {
 		// Re-mapping rating to avoid critical security issue exclaimed in SonarCloud
 		Rating persistentRating = new Rating();
-		persistentRating.setRating_id(rating.getRating_id());
-		persistentRating.setFilm_id(rating.getFilm_id());
-		persistentRating.setUser_id(rating.getUser_id());
+		persistentRating.setRatingId(rating.getRatingIdDto());
+		persistentRating.setFilmId(rating.getFilmIdDto());
+		persistentRating.setUserId(rating.getUserIdDto());
 
 		ratingRepository.save(persistentRating);
 

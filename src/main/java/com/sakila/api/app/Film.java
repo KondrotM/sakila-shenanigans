@@ -9,7 +9,7 @@ public class Film {
     @Id
     @Column(name = "film_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int _id;
+    int id;
 
     @Column(name = "title")
     String title;
@@ -28,7 +28,7 @@ public class Film {
 
     @Basic(optional = true)
     @Column(name = "rental_rate", nullable = true)
-    double rental_rate;
+    double rentalRate;
 
     /**
      * number of times watched
@@ -36,8 +36,8 @@ public class Film {
      * revenue
      */
 
-    public Film(int _id, String title, String description, int released, String rating, int length) {
-        this._id = _id;
+    public Film(int id, String title, String description, int released, String rating, int length) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.released = released;
@@ -45,19 +45,19 @@ public class Film {
         this.length = length;
     }
 
-    public Film(int _id, String title) {
-        this._id = _id;
+    public Film(int id, String title) {
+        this.id = id;
         this.title = title;
     }
 
     public Film(){}
 
-    public int get_id() {
-        return _id;
+    public int getId() {
+        return id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -100,11 +100,11 @@ public class Film {
         this.length = length;
     }
 
-    public double getRental_rate() {
-        return rental_rate;
+    public double getRentalRate() {
+        return rentalRate;
     }
 
-    public void setRental_rate(double rental_rate) {
-        this.rental_rate = rental_rate;
+    public void setRentalRate(double rentalRate) {
+        this.rentalRate = rentalRate;
     }
 }

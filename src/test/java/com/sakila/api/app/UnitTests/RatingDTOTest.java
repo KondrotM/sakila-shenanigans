@@ -22,26 +22,26 @@ public class RatingDTOTest {
         int expected = 1;
 
         RatingDTO r = new RatingDTO();
-        r.setRating_id(1);
+        r.setRatingIdDto(1);
 
-        Assertions.assertEquals(expected, r.getRating_id(), "Mismatch");
+        Assertions.assertEquals(expected, r.getRatingIdDto(), "Mismatch");
     }
     @Test
     public void test_rating_film_id_get_set() {
         int expected = 1;
 
         RatingDTO r = new RatingDTO();
-        r.setFilm_id(1);
+        r.setFilmIdDto(1);
 
-        Assertions.assertEquals(expected, r.getFilm_id(), "Mismatch");
+        Assertions.assertEquals(expected, r.getFilmIdDto(), "Mismatch");
     }
     @Test
     public void test_rating_user_id_get_set() {
         int expected = 1;
 
         RatingDTO r = new RatingDTO();
-        r.setUser_id(1);
+        r.setUserIdDto(1);
 
-        Assertions.assertEquals(expected, r.getUser_id(), "Mismatch");
+        Assertions.assertEquals(expected, r.getUserIdDto(), "Mismatch");
     }
 }

@@ -1,39 +1,39 @@
 package com.sakila.api.app;
 
 public class RatingDTO {
-    private int rating_id;
+    private int ratingId;
 
-    private int film_id;
+    private int filmId;
 
-    private int user_id;
+    private int userId;
 
     public RatingDTO() {
     }
 
-    public RatingDTO(int rating_id, int film_id, int user_id) {
+    public RatingDTO(int ratingId, int filmId, int userId) {
     }
 
-    public int getRating_id() {
-        return rating_id;
+    public int getRatingIdDto() {
+        return ratingId;
     }
 
-    public void setRating_id(int rating_id) {
-        this.rating_id = rating_id;
+    public void setRatingIdDto(int ratingId) {
+        this.ratingId = ratingId;
     }
 
-    public int getFilm_id() {
-        return film_id;
+    public int getFilmIdDto() {
+        return filmId;
     }
 
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
+    public void setFilmIdDto(int filmId) {
+        this.filmId = filmId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserIdDto() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserIdDto(int userId) {
+        this.userId = userId;
     }
 }

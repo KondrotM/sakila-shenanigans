@@ -32,9 +32,9 @@ public class FilmTest {
         int expected = 0;
 
         Film f = new Film();
-        f.set_id(0);
+        f.setId(0);
 
-        Assertions.assertEquals(expected, f.get_id(), "Mismatch");
+        Assertions.assertEquals(expected, f.getId(), "Mismatch");
     }
     @Test
     public void test_film_title_get_set() {

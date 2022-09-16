@@ -8,13 +8,13 @@ public class Category {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int _id;
+    int id;
 
     @Column(name = "name")
     String name;
 
-    public Category(int _id, String name){
-        this._id = _id;
+    public Category(int id, String name){
+        this.id = id;
         this.name = name;
     }
 
