@@ -159,9 +159,9 @@ class MockitoTests {
 	@Test
 	void testAddRating() {
 		RatingDTO r = new RatingDTO();
-		r.setUser_id_dto(1);
-		r.setRating_id_dto(1);
-		r.setFilm_id_dto(1);
+		r.setUserIdDto(1);
+		r.setRatingIdDto(1);
+		r.setFilmIdDto(1);
 
 		JsonObject j = new JsonObject();
 		j.addProperty("message", "Rating added");
